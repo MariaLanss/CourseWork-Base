@@ -1,6 +1,6 @@
 public class Main {
+    private static final Employee[] employeeBase = new Employee[10];
     public static void main(String[] args) {
-        Employee[] employeeBase = new Employee[10];
         employeeBase[0] = new Employee("Адаменко", "Татьяна", "Владимировна", 1, 10000);
         employeeBase[1] = new Employee("Андреева", "Рената", "Сергеевна", 1, 20000);
         employeeBase[2] = new Employee("Баринова", "Наталья", "Евгеньевна", 2, 25000);
@@ -10,97 +10,90 @@ public class Main {
         employeeBase[6] = new Employee("Ермакова", "Екатерина", "Олеговна", 4, 45000);
         employeeBase[7] = new Employee("Зайцева", "Марина", "Игоревна", 4, 50000);
 
-        System.out.println(dataOfEmployees(employeeBase));
-        System.out.println("Сумма затрат на зарплаты в месяц составила -- " + summSalary(employeeBase));
-        System.out.println("Сотрудник с минимальной зарплатой -- " + findEmployeesMinSalary(employeeBase));
-        System.out.println("Сотрудник с максимальной зарплатой -- " + findEmployeesMaxSalary(employeeBase));
-        System.out.println("Среднеее значение зарплат -- " + avarageSalary(employeeBase));
-        System.out.println("Ф.И.О. всех сотрудников: " + listOfEmployees(employeeBase));
+        System.out.println(dataOfEmployees());
+        System.out.println("Сумма затрат на зарплаты в месяц составила -- " + sumSalary());
+        System.out.println("Сотрудник с минимальной зарплатой -- " + findEmployeesMinSalary());
+        System.out.println("Сотрудник с максимальной зарплатой -- " + findEmployeesMaxSalary());
+        System.out.println("Среднеее значение зарплат -- " + averageSalary());
+        System.out.println("Ф.И.О. всех сотрудников: " + listOfEmployees());
     }
-    private static String dataOfEmployees(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
+    private static String dataOfEmployees() {
+        int firstEnterInBase = firstEnterInBase(employeeBase);
         if (firstEnterInBase == -1) {
             return "None";
         }
 
         String dataOfEmployees = "";
 
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                dataOfEmployees += employees[i] + "\n";
+        for (int i = firstEnterInBase; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null) {
+                dataOfEmployees += employeeBase[i] + "\n";
             }
         }
         return dataOfEmployees;
     }
-    private static String listOfEmployees(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
+    private static String listOfEmployees() {
+        int firstEnterInBase = firstEnterInBase(employeeBase);
         if (firstEnterInBase == -1) {
             return "None";
         }
         String listOfEmployees = "";
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                listOfEmployees += employees[i].getFullName() + "\n";
+        for (int i = firstEnterInBase; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null) {
+                listOfEmployees += employeeBase[i].getFullName() + "\n";
             }
         }
         return listOfEmployees;
     }
-    private static int summSalary(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
-        if (firstEnterInBase == -1) {
-            return 0;
-        }
-        int summSalary = 0;
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                summSalary += employees[i].getSalary();
+    public static double sumSalary() {
+        double sumSalary = 0;
+        for (int i = 0; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null) {
+                sumSalary += employeeBase[i].getSalary();
             }
         }
-        return summSalary;
+        return sumSalary;
     }
-    private static String findEmployeesMinSalary(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
+    private static String findEmployeesMinSalary() {
+        int firstEnterInBase = firstEnterInBase(employeeBase);
         if (firstEnterInBase == -1) {
             return "None";
         }
-        int minSalary = employees[firstEnterInBase].getSalary();
+        int minSalary = employeeBase[firstEnterInBase].getSalary();
         int indexEmployeesMinSalary = firstEnterInBase;
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getSalary() < minSalary) {
-                minSalary = employees[i].getSalary();
+        for (int i = firstEnterInBase; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null && employeeBase[i].getSalary() < minSalary) {
+                minSalary = employeeBase[i].getSalary();
                 indexEmployeesMinSalary = i;
             }
         }
-        return employees[indexEmployeesMinSalary].getFullName();
+        return employeeBase[indexEmployeesMinSalary].getFullName();
     }
-    private static String findEmployeesMaxSalary(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
+    private static String findEmployeesMaxSalary() {
+        int firstEnterInBase = firstEnterInBase(employeeBase);
         if (firstEnterInBase == -1) {
             return "None";
         }
-        int maxSalary = employees[firstEnterInBase].getSalary();
+        int maxSalary = employeeBase[firstEnterInBase].getSalary();
         int indexEmployeesMaxSalary = firstEnterInBase;
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getSalary() > maxSalary) {
-                maxSalary = employees[i].getSalary();
+        for (int i = firstEnterInBase; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null && employeeBase[i].getSalary() > maxSalary) {
+                maxSalary = employeeBase[i].getSalary();
                 indexEmployeesMaxSalary = i;
             }
         }
-        return employees[indexEmployeesMaxSalary].getFullName();
+        return employeeBase[indexEmployeesMaxSalary].getFullName();
     }
-    private static int avarageSalary(Employee[] employees) {
-        int firstEnterInBase = firstEnterInBase(employees);
-        if (firstEnterInBase == -1) {
-            return 0;
-        }
-        int countEmployees = 0;
-        int summSalary = summSalary(employees);
-        for (int i = firstEnterInBase; i < employees.length; i++) {
-            if (employees[i] != null) {
-                countEmployees++;
+    public static double averageSalary() {
+        double averageSalary;
+        int salaryCount = 0;
+        for (int i = 0; i < employeeBase.length; i++) {
+            if (employeeBase[i] != null) {
+                salaryCount++;
             }
         }
-        return Math.round(summSalary / countEmployees);
+        averageSalary = sumSalary() / salaryCount;
+        return averageSalary;
     }
     private static int firstEnterInBase(Employee[] employees) {
         for (int i = 0; i < employees.length; i++) {
